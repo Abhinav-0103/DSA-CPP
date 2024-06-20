@@ -10,6 +10,7 @@
         "string": "cpp",
         "xlocale": "cpp",
         "new": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "stack": "cpp"
     }
 }
