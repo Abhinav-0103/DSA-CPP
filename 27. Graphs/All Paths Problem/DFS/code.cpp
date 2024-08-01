@@ -30,13 +30,12 @@ class Graph {
 
             for(int v: l[src]) {
                 if(!vis[v]) {
-                    vis[v] = true;
                     allPathsUtil(v,dest,vis,path);
-                    vis[v] = false;
                 }
             }
 
             path.pop_back();
+            vis[src] = false;
         }
 
         void allPaths(int src, int dest) {
