@@ -36,6 +36,23 @@ class SegmentTree {
         return left + right;
     }
 
+    void updateQueryUtil(int idx, int val, int st, int end, int node) {
+        if(st == end) {
+            tree[node] = val;
+            return;
+        }
+
+        int mid = st + (end - st) / 2;
+
+        if(idx >= st && idx <= mid) {
+            updateQueryUtil(idx,val,st,mid,2*node+1);
+        } else {
+            updateQueryUtil(idx,val,mid+1,end,2*node+2);
+        }
+
+        tree[node] = tree[2*node+1] + tree[2*node+2];
+    }
+
     public :
         SegmentTree(vector<int> &arr) {
             n = arr.size();
@@ -53,6 +70,10 @@ class SegmentTree {
         int rangeQuery(int qi, int qj) {
             return rangeQueryUtil(qi,qj,0,n-1,0);
         }
+
+        void updateQuery(int idx, int val) {
+            updateQueryUtil(idx,val,0,n-1,0);
+        }
 };
 
 int main() {
@@ -65,5 +86,9 @@ int main() {
     int qj = 5;
 
     cout << "Range Query between " << qi << " & " << qj << ": " << st.rangeQuery(qi,qj) << endl; 
+
+    st.updateQuery(1,3);
+
+    st.printTree();
     return 0;
 }
